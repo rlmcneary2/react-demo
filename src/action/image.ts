@@ -15,34 +15,41 @@ const actions = {
     getImage(currentImages: any[]) {
         // Demo purposes only.
         return async dispatch => {
+            // We don't know if this is state or a copy, so make our own copy before changing it.
             const cImages = currentImages.slice();
             if (cImages.length === _MAX_IMAGES) {
                 cImages.splice(0, 1);
             }
 
+            // Let the application know changes are in progress.
             const imagesNeeded = _MAX_IMAGES - cImages.length;
             dispatch(this.getImageStart(imagesNeeded));
 
             const nextImages = [];
             let perpage;
             let photo: any[];
+
+            // Don't stop until we have enough new images so our collection has _MAX_IMAGES.
             while (nextImages.length < imagesNeeded) {
                 ({ perpage, photo } = await getInterestingPhotos());
                 const min = Math.ceil(0);
                 const max = Math.floor(perpage);
                 const indices = [];
                 do {
+                    // Randomly choose the index of an interesting photo that we don't already have.
                     const index = Math.floor(Math.random() * (max - min + 1)) + min;
                     if (!indices.includes(index) && photo[index]) {
                         indices.push(index);
                     }
                 } while (indices.length < imagesNeeded);
 
+                // For each random index get the photo information.
                 indices.forEach(item => {
                     nextImages.push(photo[item]);
                 });
             }
 
+            // For each photo dispatch the end event so it will get added to the list for display.
             nextImages.forEach(async item => {
                 const { id } = item;
                 const { thumb } = await getPhotoSizes(id);

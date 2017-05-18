@@ -1,9 +1,9 @@
 
 
-import {ImageClickedHandler} from "./declarations";
+import { ImageClickedHandler } from "./declarations";
 import * as React from "react";
 import CSSTransitionGroup from "react-transition-group/CSSTransitionGroup";
-import { ImageItem, ImageItemType } from "../reducer/image";
+import { ImageItemType } from "../reducer/image";
 import ImageListItem from "./ImageListItem";
 
 
@@ -38,23 +38,14 @@ export { ImageClickedHandler, Props };
 
 
 function createListItems(imageItems: ImageItemType[], imageClicked: ImageClickedHandler): any[] {
-    return imageItems.map((item: ImageItemType) => {
-        const iProps = Object.assign({ imageClicked }, item);
-        let image;
-        if (isImageItem(item)) {
-            image = (
+    return imageItems
+        .filter(item => {
+            return item !== null;
+        })
+        .map((item: ImageItemType) => {
+            const iProps = Object.assign({ imageClicked }, item);
+            return (
                 <ImageListItem key={item.id} {...iProps} />
             )
-        } else {
-            image = null;
-        }
-
-        return image;
-    }).filter(item => {
-        return item !== null;
-    });
-}
-
-function isImageItem(item: null | ImageItem): item is ImageItem {
-    return item !== null;
+        });
 }

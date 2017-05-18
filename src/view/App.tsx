@@ -7,13 +7,11 @@ import * as redux from "react-redux";
 import { ImageItem, ImageItemType, State as ImageState } from "../reducer/image";
 
 
-export default redux.connect(mapStateToProps, mapDispatchToProps)(props => {
-    const ilProps: ImageListProps = props;
-
+export default redux.connect(mapStateToProps, mapDispatchToProps)((props: ImageListProps) => {
     return (
         <div>
-            <p>Click an image to remove it.</p>
-            <ImageList {...ilProps} />
+            <p style={{ fontSize: "24pt" }}>Click an image to remove it.</p>
+            <ImageList {...props} />
         </div>
     );
 });

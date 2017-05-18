@@ -1,6 +1,6 @@
 
 
-import {ImageClickedHandler} from "./declarations";
+import { ImageClickedHandler } from "./declarations";
 import * as React from "react";
 import { ImageItem } from "../reducer/image";
 

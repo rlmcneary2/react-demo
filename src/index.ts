@@ -37,6 +37,9 @@ setTimeout(() => {
     const reduxMiddleware = redux.applyMiddleware(...middlewareArgs);
     const store = redux.createStore(reducers, {}, reduxMiddleware);
 
+    // Since webpack is automatically generating an empty body in the HTML file
+    // we'll add an element here for React to attach to. There are ways to
+    // provide a template HTML document to webpack but I haven't done that.
     const div = document.createElement("div");
     div.id = "react";
     const body = document.getElementsByTagName("body")[0];
