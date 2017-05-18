@@ -1,0 +1,44 @@
+@import "reset";
+
+
+$row_height: 200px;
+
+
+body {
+    background: rgb(31, 29, 28);
+    color: white;
+}
+
+li {
+    list-style: none;
+}
+
+.thumbnail-list {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.thumbnail-container {
+    flex: 1 1 auto;
+    margin: 6px 6px 0 0;
+    opacity: 1;
+    text-align: center;
+    transition: opacity 400ms ease-in
+}
+
+.thumbnail-container-enter {
+    opacity: 0;
+}
+
+.thumbnail-container-leave {
+    opacity: initial;
+}
+
+.thumbnail-container-leave-active {
+    opacity: 0;
+}
+
+.thumbnail-large {
+    height: 100%;
+    max-height: $row_height;
+}

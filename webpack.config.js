@@ -1,7 +1,6 @@
 "use strict";
 
-
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 const webpack = require("webpack");
@@ -33,6 +32,16 @@ module.exports = {
     entry: `./${_SOURCE_DIR}/index.ts`,
     module: {
         rules: [
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin .extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }]
+                })
+            },
             {
                 test: /\.tsx?$/,
                 exclude: /(node_modules|bower_components)/,
@@ -80,29 +89,11 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({ "process.env": { NODE_ENV: process.env.NODE_ENV } }),
         new webpack.LoaderOptionsPlugin({ debug: true }),
-        new FaviconsWebpackPlugin({
-            emitStats: false,
-            icons: {
-                android: false,
-                appleIcon: false,
-                appleStartup: false,
-                coast: false,
-                favicons: false,
-                firefox: true,
-                opengraph: false,
-                twitter: false,
-                yandex: false,
-                windows: false
-            },
-            inject: true,
-            logo: "./src/star.png",
-            persistentCache: true,
-            prefix: ""
-        }),
-        new HtmlWebpackPlugin({ inject: "head", title: "Rich McNeary" })
+        new ExtractTextPlugin("app.css"),
+        new HtmlWebpackPlugin({ inject: "head", title: "Rich McNeary" }),
     ],
     resolve: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        extensions: [".js", ".jsx", ".ts", ".tsx", ".scss"]
     },
     target: "web"
 };

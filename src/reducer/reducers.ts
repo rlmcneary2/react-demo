@@ -1,12 +1,9 @@
 
 
-const { combineReducers } = require("redux");
+import { combineReducers } from "redux";
+import image from "./image";
 
 
-export default (state, action) => {
-    return reducers(state, action);
-};
-
-
-const reducers = combineReducers({
+export default combineReducers({
+    image
 });
