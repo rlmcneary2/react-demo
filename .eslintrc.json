@@ -1,0 +1,51 @@
+{
+    "env": {
+        "es6": true,
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "worker": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+        "gulp": false
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+            "experimentalObjectRestSpread": true
+        },
+        "ecmaVersion": 2017,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "eqeqeq": 1,
+        "indent": [
+            2,
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-console": 1,
+        "quotes": [
+            
+            2,
+            "double"
+        ],
+        "react/jsx-uses-vars": [
+            2
+        ],
+        "linebreak-style": [
+            2,
+            "windows"
+        ],
+        "semi": [
+            2,
+            "always"
+        ]
+    }
+}
